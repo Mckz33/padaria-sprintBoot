@@ -47,4 +47,27 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.OK).body(produtoModelOptional.get());
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteProduto(@PathVariable(value = "id") UUID id){
+        Optional<ProdutoModel> produtoModelOptional = produtoService.findById(id);
+        if (!produtoModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+        }
+        produtoService.delete(produtoModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Produto deletado com sucesso!");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateProduto(@PathVariable(value = "id") UUID id, @RequestBody @Valid ProdutoDto produtoDto){
+        Optional<ProdutoModel> produtoModelOptional = produtoService.findById(id);
+        if (!produtoModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+        }
+        var produtoModel = produtoModelOptional.get();
+        BeanUtils.copyProperties(produtoDto, produtoModel);
+        produtoModel.setId(produtoModelOptional.get().getId());
+        produtoModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+        return ResponseEntity.status(HttpStatus.OK).body(produtoService.save(produtoModel));
+    }
+
 }

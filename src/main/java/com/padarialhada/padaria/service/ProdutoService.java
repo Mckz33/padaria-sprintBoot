@@ -29,4 +29,9 @@ public class ProdutoService {
     public Optional<ProdutoModel> findById(UUID id) {
         return produtoRepository.findById(id);
     }
+
+    @Transactional
+    public void delete(ProdutoModel produtoModel) {
+        produtoRepository.delete(produtoModel);
+    }
 }
