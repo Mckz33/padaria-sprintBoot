@@ -1,20 +1,24 @@
 package com.padarialhada.padaria.dtos;
 
+import com.sun.istack.NotNull;
+
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 public class ProdutoDto {
 
     @NotBlank
     private String nome;
 
-    @NotBlank
+    @NotNull
     private Double valor;
 
-    @NotBlank
+    @NotNull
     private Integer quantidade;
 
     @NotBlank
     private String descricao;
+
 
     public String getNome() {
         return nome;
@@ -47,4 +51,5 @@ public class ProdutoDto {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
 }

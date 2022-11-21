@@ -2,6 +2,7 @@ package com.padarialhada.padaria.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -16,15 +17,17 @@ public class ProdutoModel implements Serializable {
     @Column(nullable = false, length = 33)
     private String nome;
 
-    @Column(nullable = false, length = 33)
+    @Column(nullable = false)
     private Double valor;
 
-    @Column(nullable = false, length = 33)
-    private Integer quantidade;
+    @Column(nullable = false)
+    private int quantidade;
 
-    @Column(nullable = false, length = 33)
+    @Column(nullable = false)
     private String descricao;
 
+    @Column(nullable = false)
+    private LocalDateTime registrationDate;
 
     public UUID getId() {
         return id;
@@ -64,5 +67,13 @@ public class ProdutoModel implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDateTime registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }
