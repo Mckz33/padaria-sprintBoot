@@ -38,5 +38,13 @@ public class ProdutoController {
     public ResponseEntity<List<ProdutoModel>> getAllProdutos(){
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findAll());
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneProdutos(@PathVariable(value = "id") UUID id){
+        Optional<ProdutoModel> produtoModelOptional = produtoService.findById(id);
+        if (!produtoModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(produtoModelOptional.get());
+    }
 
 }
