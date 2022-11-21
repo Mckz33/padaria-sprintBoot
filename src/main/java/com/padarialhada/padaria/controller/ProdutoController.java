@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -23,6 +26,7 @@ public class ProdutoController {
         this.produtoService = produtoService;
     }
 
+
     @PostMapping
     public ResponseEntity<Object> saveProduto(@RequestBody @Valid ProdutoDto produtoDto){
         var produtoModel = new ProdutoModel();
@@ -30,4 +34,9 @@ public class ProdutoController {
         produtoModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.save(produtoModel));
     }
+    @GetMapping
+    public ResponseEntity<List<ProdutoModel>> getAllProdutos(){
+        return ResponseEntity.status(HttpStatus.OK).body(produtoService.findAll());
+    }
+
 }

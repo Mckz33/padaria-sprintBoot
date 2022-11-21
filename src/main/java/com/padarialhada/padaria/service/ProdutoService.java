@@ -5,6 +5,7 @@ import com.padarialhada.padaria.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ProdutoService {
@@ -17,4 +18,9 @@ public class ProdutoService {
     public ProdutoModel save(ProdutoModel produtoModel) {
         return produtoRepository.save(produtoModel);
     }
+
+    public List<ProdutoModel> findAll() {
+        return produtoRepository.findAll();
+    }
+
 }
