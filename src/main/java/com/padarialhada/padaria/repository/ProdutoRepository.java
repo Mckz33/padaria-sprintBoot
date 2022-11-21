@@ -1,2 +1,12 @@
-package com.padarialhada.padaria.repository;public interface ProdutoRepository {
+package com.padarialhada.padaria.repository;
+
+import com.padarialhada.padaria.model.ProdutoModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+public interface ProdutoRepository extends JpaRepository<ProdutoModel, UUID> {
+
 }
